@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">[[#{index.bienvenida}]]</h1>
+
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <a class="btn btn-success mb-3" th:href="@{/agregar}">Crear Persona</a>
+
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>[[#{persona.nombre}]]</th>
+                    <th>[[#{persona.apellido}]]</th>
+                    <th>[[#{persona.email}]]</th>
+                    <th>[[#{persona.telefono}]]</th>
+                    <th>[[#{persona.editar}]]</th>
+                    <th>[[#{persona.eliminar}]]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="persona : ${personas}">
+                    <td th:text="${persona.nombre}"></td>
+                    <td th:text="${persona.apellido}"></td>
+                    <td th:text="${persona.email}"></td>
+                    <td th:text="${persona.telefono}"></td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{'/editar/' + ${persona.idPersona}}">[[#{accion.editar}]]</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" th:href="@{'/eliminar/' + ${persona.idPersona}}">[[#{accion.eliminar}]]</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <footer th:replace="layout/plantilla ::footer"></footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
